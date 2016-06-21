@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Vigenere</title>
+	<meta name="description" content="Web informativa sobre el cifrado de Vigénere">
+	<meta name="author" content="Alejandro Sánchez Muñoz, Cristian Vázquez Casanova y Samuel Velázquez Revilla">
+	<meta name="keywords" content="HTML5, web, vigenere" />
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+	<link rel="stylesheet" href="stylesheets/blueberry.css" />
+	<link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="js/jquery.blueberry.js"></script>
+	<script src="js/vigenere.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/base.js"></script>
+	
+	<script>
+	$(window).load(function() {
+		$('.blueberry').blueberry();
+	});
+	</script>
+	
+
+</head>
+<body>
+		<div id="totop">
+        		<a href="#header" ><img src="images/totop.png" class="scale-with-grid" /></a>
+		</div>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<div id="header">
+		<div class="container">
+			<div id="logo" class="seven columns">
+				<a href="index.html"><img src="images/logo.png" class="scale-with-grid" /></a>
+			</div>
+			<div class="nine columns">
+				<div class="nav" >
+						<ul id="menu">
+							<li   id="linkinicio"><a href='index.html'><span>Inicio</span></a></li>
+							<li ><a href='documentacion.html'><span>¿Qué es Vigénere?</span></a></li>
+							<li  class="active"><a href='webapp.html'><span>Aplicación WEB</span></a></li>
+							<li><a href='programac.html'><span>Programa en C</span></a></li>
+						</ul>
+						<form action="../">
+						<select id="responsiveMenuSelect" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+							<option class="option" value="index.html"  >Inicio</option>
+							<option class="option" value="documentacion.html">¿Qué es Vigénere?</option>
+							<option class="option" value="webapp.html" selected="selected">Aplicación WEB</option>
+							<option class="option" value="programac.html"  >Programa en C</option>
+						</select>
+						</form>
+						<script>
+						$("nav select").change(function() {
+						  window.location = $(this).find("option:selected").val();
+						});
+						</script>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="container" id="appwrapper">
+		<div id="eleccion" class="sixteen column">
+			<h1>Aplicación web Vigénere</h1>
+			<p >A continuación hay una pequeña demostración del cifrado de Vigènere, programado en JavaScript
+			para que pueda ser ejecutado dentro de la página web. Podrá tanto cifrar como descifrar, 
+			así como twittear su mensaje cifrado o descifrado.</p>
+			<p>Además, el propio sitio web le va guiando en las operaciones y le ayuda utilizar una clave de características óptimas</p>
+		</div>
+		<h2>¿Qué desea hacer?</h2>
+		<div class = "eight columns">
+			<img  class="scale-with-grid" src="images/candadoabierto.png" />
+			<div class = "select-button button-peq" ><a href="#cifrado">Cifrar</a></div>
+		</div>
+		<div class = "eight columns ">
+			<img  class="scale-with-grid" src="images/candado.png" />
+			<div class = "select-button button-peq" ><a href="#descifrado" >Descifrar</a></div>
+		</div>
+		<div class="sixteen columns separador600px" ></div>
+		
+<!-- ================ CIFRADO ================ -->		
+		
+		<div class="sixteen columns" id="cifrado">
+			<h1>Cifrado</h1>
+			<p>Introduce una clave de cifrado junto con el mesaje que quieres cifrar. No olvides recordar dicha 
+			clave y compartirla con la persona o el grupo con el que quieres intercambiar mensajes.</p>
+		</div>
+		<div class="sixteen columns" >
+			<h2>1º Introduce la clave</h2>
+			<p>La clave no puede tener una longitud mayor que el mensaje a cifrar. Por otro lado, se recomienda una longitud inferior a 6 caracteres.</p>
+		</div>
+		<div class="two-thirds column">
+			 <input type="text" id="input-clave-cifrado" name="clave-cifrado" onchange="comprobarclavecifrado()"><br>
+		</div>
+		<div class="one-third column">
+			<img  class="scale-with-grid" src="images/candadoabierto.png" />
+		</div>
+		<div class="sixteen columns" >
+			<h2>2º Introduce el mensaje a cifrar</h2>
+			<p>El mensaje debe contener caracteres del alfabeto inglés, es decir, no admitirá acentos, caracteres especiales o la letra ñ.</p>
+		</div>
+		<div class="two-thirds column">
+			<TEXTAREA id="input-mensaje-cifrado" name="mensaje"  ></TEXTAREA>
+		</div>
+		<div class="one-third column">
+			<img  class="scale-with-grid" src="images/mensaje.png" />
+			<div class = "select-button button-peq" ><a onclick="cifrar()">3º Cifrar</a>
+			</div>
+		</div>
+		<div class="sixteen columns" >
+			<div class="errorclave" id="errorclavecifrado"><p id="textoerror">Errores</p></div>
+			<div class="resultado" ><p class="center" id="mensaje-cifrado" >¡Aquí aparecerá tu mensaje cifrado!</p></div>
+			<a class="botontweet" onclick="tuitearcifrado()"> <img src="images/tweetthis.png"  border="0" alt="Tweet This!" /> </a>
+		</div>
+<!-- ================ FIN CIFRADO ================ -->	
+			
+		<div class="sixteen columns separador600px" ></div>
+		
+<!-- ================ Decifrado ================ -->	
+	
+		<div class="sixteen columns"  id="descifrado">
+			<h1>Descifrado</h1>
+			<p>Introduce el mensaje cifrado y la clave correspondiente para obtener el mensaje original.</p>
+		</div>
+		<div class="sixteen columns" >
+			<h2>1º Introduce la clave</h2>
+			<p>Debes conocer la clave con la que se cifró el mensaje original, esta no puede tener una longitud mayor que el mensaje a cifrar.</p>
+		</div>
+		<div class="two-thirds column">
+			 <input type="text" id="input-clave-descifrado" name="clave-descifrado" onchange="comprobarclavedescifrado()"><br>
+		</div>
+		<div class="one-third column">
+			<img  class="scale-with-grid" src="images/candado.png" />
+		</div>
+		<div class="sixteen columns" >
+			<h2>2º Introduce el mensaje a descifrar</h2>
+		</div>
+		<div class="two-thirds column">
+			<TEXTAREA id="input-mensaje-descifrado" name="mensajedes" ></TEXTAREA>
+		</div>
+		<div class="one-third column">
+			<img  class="scale-with-grid" src="images/mensaje.png" />
+			<div class = "select-button button-peq"><a onclick="descifrar()" >3º Descifrar</a>
+			</div>
+		</div>
+		<div class="sixteen columns" >
+			<div class="errorclave" id="errorclavedescifrado"><p id="textoerrordes">Errores</p></div>
+			<div class="resultado"><p class="center" id="mensaje-descifrado" >¡Aquí aparecerá tu mensaje descifrado!</p></div>
+			<a class="botontweet" onclick="tuiteardescifrado()"> <img src="images/tweetthis.png"  border="0" alt="Tweet This!" /> </a>
+		</div>
+		
+<!-- ================ FIN DESCIFRADO ================ -->			
+		
+		
+	</div><!-- container INICIO -->
+
+
+<div id="footer">
+		<div class="container">
+			<div class="two-thirds column row">
+				<p>El sitio está bajo una licencia creative commons. 2013</p>
+			</div>
+		</div>
+</div>
+<!-- End Document
+================================================== -->
+	
+</body>
+</html>

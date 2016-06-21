@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Documentación - Vigènere</title>
+	<meta name="description" content="Web informativa sobre el cifrado de Vigènere">
+	<meta name="author" content="Alejandro Sánchez Muñoz, Cristian Vázquez Casanova y Samuel Velázquez Revilla">
+	<meta name="keywords" content="HTML5, web, vigenere" />
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+	<link rel="stylesheet" href="stylesheets/blueberry.css" />
+	<link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="js/jquery.blueberry.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/base.js"></script>
+	
+	<script>
+	$(window).load(function() {
+		$('.blueberry').blueberry();
+	});
+	</script>
+	
+
+
+</head>
+<body>
+		<div id="totop">
+        		<a href="#header" ><img src="images/totop.png" class="scale-with-grid" /></a>
+		</div>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<div id="header">
+		<div class="container">
+			<div id="logo" class="seven columns">
+				<a href="index.html"><img src="images/logo.png" class="scale-with-grid" /></a>
+			</div>
+			<div class="nine columns">
+				<div class="nav" >
+						<ul id="menu">
+							<li   id="linkinicio"><a href='index.html'><span>Inicio</span></a></li>
+							<li class="active" ><a href='documentacion.html'><span>¿Qué es Vigènere?</span></a></li>
+							<li><a href='webapp.html'><span>Aplicación WEB</span></a></li>
+							<li><a href='programac.html'><span>Programa en C</span></a></li>
+						</ul>
+						<form action="../">
+						<select id="responsiveMenuSelect" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+							<option class="option" value="index.html" >Inicio</option>
+							<option class="option" value="documentacion.html" selected="selected">¿Qué es Vigènere?</option>
+							<option class="option" value="webapp.html">Aplicación WEB</option>
+							<option class="option" value="programac.html" >Programa en C</option>
+						</select>
+						</form>
+						<script>
+						$("nav select").change(function() {
+						  window.location = $(this).find("option:selected").val();
+						});
+						</script>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="container">
+	
+		<div class="sixteen columns">
+			<h1>Documentación</h1>
+			<h3>Índice</h3>
+			<ul id="indice">
+				<li><a href="#introhistorica">Introducción histórica</a></li>
+				<li><a href="#queesvigenere">¿Qué es Vigènere?</a></li>
+				<li><a href="#comofunciona">¿Cómo funciona?</a></li>
+				<li><a href="#problemas">Problemas de seguridad</a></li>
+			</ul>
+			
+			
+			<h2 id="introhistorica">Introducción histórica</h2>
+				<p>Los orígenes del cifrado de Vigènere los encontramos en 1508, en la tabula recta 
+				del alemán <strong>Johannes Trithemius</strong>, abad de Würzburg y uno de los considerados
+				<strong>“Padres de la criptología”</strong>, que compartía muchas similitudes con la 
+				actual tabla de Vigènere, aunque era más previsible y rígida.</p>
+				
+				<p>Mediante esta <i>tabula recta</i> Trithemius cifraba la primera letra del mensaje con la 
+				primera línea de la tabla, la segunda letra con la segunda línea y así, de manera que:</p>
+				
+				<table class="table-documento">
+					<tr>
+						<th><strong>Mensaje original</strong></th>
+						<td>H</td>
+						<td>O</td>
+						<td>L</td>
+						<td>A</td>
+						<td>M</td>
+						<td>U</td>
+						<td>N</td>
+						<td>D</td>
+						<td>O</td>
+					</tr>
+					<tr>
+						<th><strong>Clave</strong></th>
+						<td>0</td>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+						<td>8</td>
+					</tr>
+					<tr>
+						<th><strong>Mensaje cifrado</strong></th>
+						<td>H</td>
+						<td>P</td>
+						<td>N</td>
+						<td>D</td>
+						<td>Q</td>
+						<td>Z</td>
+						<td>T</td>
+						<td>K</td>
+						<td>W</td>
+					</tr>
+				</table>
+				
+				<p>Como podemos observar, Trithemius no utilizaba clave de cifrado, solamente una progresión
+				algebraica para cifrar, lo que convertía su cifrador en débil.</p>
+				
+				
+				<img src="images/imagen1.png" class="scale-with-grid marcofoto" />
+				<p class="piefoto">Tabula recta de Trithemius en su obra “Poligrafia en seis libros por João Trithemius,
+				abad de Würzburg, anteriormente de Sponheim, dedicados al Emperador Maximiliano”</p>
+				
+				<p>En 1553 <strong>Giovan Battista Belasso</strong> fortifica el cifrado de Trithemius 
+				<strong>añadiendo una clave de cifrado</strong>, de manera que elimina la debilidad de 
+				la progresión matemática convirtiendo el cifrado en polialfabético.</p>
+				
+				<p>Es finalmente en 1586 cuando <strong>Blaise de Vigènere</strong>, en su obra <i>Traicte 
+				de Chiffres</i> publica el definitivo <strong>cifrado de Vigènere</strong>, añadiendo medidas 
+				al trabajo de Belasso para sumar robustez al cifrado, como la especificación de que el 
+				tamaño idóneo de la clave ha de ser de seis dígitos.</p>
+				
+				<p>El cifrado fue adquiriendo fama por su dificultad para ser descifrado sin conocer la clave.
+				No en vano, <strong>Lewis Carroll</strong> (autor del famoso cuento infantil Alicia en 
+				el País de las Maravillas) o la prestigiosa revista americana <strong>Scientific American</strong>
+				hablaron del cifrado de Vigènere como <i>“El cifrado imposible de romper”</i>. </p>
+				
+				<p>Ya en el siglo XVI algunos criptoanalistas consiguieron descifrar algunos mensajes 
+				encriptados con este método, pero no existía un método o algoritmo fiable de desencriptado
+				hasta que, en el siglo XIX el oficial prusiano <strong>Friedrich Kasiski</strong> consiguió
+				hallarlo, buscando cadenas de caracteres en el criptograma para así descifrar la clave.</p>
+				
+				<p>Hace cerca de un siglo <strong>Gilbert Vernam</strong> intentó salvar el cifrado de Vigènere
+				del método Kasiski con el <strong>método Vernam-Vigènere</strong>, pero no tuvo éxito.</p>
+	
+			<h2 id="queesvigenere">¿Qué es Vigènere?</h2>
+				<p>El cifrado de Vigènere es un método de encriptación de mensajes que gira en torno a una tabla <i>(tabla de Vigènere)</i>:</p>
+				<img src="images/tablavigenere.png" class="scale-with-grid"  id="tablavigenereIMG"/>
+				<table class="table-documento" id="tablavigenereHTML">
+				<tr align="center" >
+				  <td><br>
+				  </td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y</td>
+				  <td>Z</td>
+				</tr>
+				<tr align="center" >
+				  <td>A</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >B</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >C</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >D</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >E</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >F</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >G</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >H</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >I</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >J</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >K</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >L</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >M</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >N</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >O</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >P</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >Q</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >R</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >S</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >T</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >U</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y</td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >V</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >W</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >X</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >Y<br>
+				  </td>
+				  <td>Y<br>
+				  </td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				</tr>
+				<tr align="center"  >
+				  <td  >Z</td>
+				  <td>Z</td>
+				  <td>A</td>
+				  <td>B</td>
+				  <td>C</td>
+				  <td>D</td>
+				  <td>E</td>
+				  <td>F</td>
+				  <td>G</td>
+				  <td>H</td>
+				  <td>I</td>
+				  <td>J</td>
+				  <td>K</td>
+				  <td>L</td>
+				  <td>M</td>
+				  <td>N</td>
+				  <td>O</td>
+				  <td>P</td>
+				  <td>Q</td>
+				  <td>R</td>
+				  <td>S</td>
+				  <td>T</td>
+				  <td>U</td>
+				  <td>V</td>
+				  <td>W</td>
+				  <td>X</td>
+				  <td>Y<br>
+				  </td>
+				</tr>
+			  </tbody>
+			</table>
+
+				
+				
+				
+				<p>Se elige una palabra como clave cifradora, y se halla el producto en la tabla entre cada carácter del mensaje y la clave. 
+				El cifrado de Vigènere goza de mucha fama por su sencilla aplicación y su, hasta hace un siglo, condición de irresoluble. 
+				Hablamos de un cifrador polialfabético, porque al cifrar un carácter no siempre va a tener el mismo resultado (dependerá 
+				del carácter de la clave). Está claramente inspirado en el <strong>cifrado del César</strong>, pero este era monoalfabético, con lo cual 
+				se podía descifrar de manera relativamente sencilla.</p>
+				<p>Cuando buscamos una clave, lo ideal es que conste al menos de 6 caracteres distintos, para que así sea más complicado
+				hallar redundancias del lenguaje (transformaciones similares), dificultando así el trabajo de criptoanálisis al <strong>método de 
+				Kasiski</strong>, el más conocido para este cifrado.</p>
+
+			<h2 id="comofunciona">¿Cómo funciona?</h2>
+				<p>Cómo hemos dicho anteriormente, el cifrado de Vigènere se hace cifra a cifra, tomando el producto de cada carácter de mensaje con su correspondiente en la cifra. La fórmula es:</p>
+				<p class="formula">Cifrado = (Mensaje+Clave)  mod Alfabeto</p>
+				<table class="table-documento">
+					<tr>
+						<th><strong>Mensaje original</strong></th>
+						<td>H</td>
+						<td>O</td>
+						<td>L</td>
+						<td>A</td>
+						<td>M</td>
+						<td>U</td>
+						<td>N</td>
+						<td>D</td>
+						<td>O</td>
+					</tr>
+					<tr>
+						<th><strong>Clave</strong></th>
+						<td>D</td>
+						<td>R</td>
+						<td>A</td>
+						<td>G</td>
+						<td>O</td>
+						<td>N</td>
+						<td>D</td>
+						<td>R</td>
+						<td>A</td>
+					</tr>
+					<tr>
+						<th><strong>Mensaje cifrado</strong></th>
+						<td>K</td>
+						<td>F</td>
+						<td>L</td>
+						<td>G</td>
+						<td>A</td>
+						<td>H</td>
+						<td>Q</td>
+						<td>U</td>
+						<td>O</td>
+					</tr>
+				</table>
+				<p>Por ejemplo, si se tratase del alfabeto español se sumarían los índices de cada carácter del mensaje y la clave y se dividiría
+				por 27. Así, si ciframos <i>Hola Mundo</i> con clave <i>Dragón</i> obtendríamos:</p>
+				<p>El proceso de descifrado es el opuesto:</p>
+				<p class="formula">Descifrado=(Cifrado - Clave)  mod Alfabeto</p>
+				<p>En caso de resultar un número negativo se le sumaría el número total de elementos del alfabeto para obtener así el número positivo del carácter correspondiente.</p>
+				<table class="table-documento">
+					<tr>
+						<th><strong>Mensaje original</strong></th>
+						<td>K</td>
+						<td>F</td>
+						<td>L</td>
+						<td>G</td>
+						<td>A</td>
+						<td>H</td>
+						<td>Q</td>
+						<td>U</td>
+						<td>O</td>
+					</tr>
+					<tr>
+						<th><strong>Clave</strong></th>
+						<td>D</td>
+						<td>R</td>
+						<td>A</td>
+						<td>G</td>
+						<td>O</td>
+						<td>N</td>
+						<td>D</td>
+						<td>R</td>
+						<td>A</td>
+					</tr>
+					<tr>
+						<th><strong>Mensaje descifrado</strong></th>
+						<td>H</td>
+						<td>O</td>
+						<td>L</td>
+						<td>A</td>
+						<td>M</td>
+						<td>U</td>
+						<td>N</td>
+						<td>D</td>
+						<td>O</td>
+					</tr>
+				</table>
+				
+			<h2 id="problemas">Problemas de seguridad</h2>
+				<p>Como hemos comentado anteriormente, el cifrado de Vigènere gozó de gran fama hasta el siglo XIX. 
+				Fue entonces cuando <strong>Friedrich Kasiski</strong>, oficial prusiano, descubrió el modo de atacar
+				a este método de encriptación, basándose en la repetición de cadenas de caracteres.</p>
+				<p>Kasiski dedujo que si encontraba cadenas de caracteres de longitud 3 o mayor repetidas, lo más
+				probable es que estuvieran codificados por la misma porción de clave y, por tanto, sean iguales en 
+				el texto original. La distancia entre estas cadenas ha de ser un múltiplo del tamaño de la clave. 
+				Una vez tengamos todas las distancias, el máximo común divisor será el tamaño de la clave.</p>
+				<p>Cuando ya tengamos el tamaño, el mensaje será fácilmente descifrable con un ataque por estadísticas
+				de lenguaje, es decir, teniendo en cuenta que los caracteres más repetidos, AEO, están separados por 4
+				y 11 posiciones.</p>
+		</div>
+		
+		<div class="sixteen columns separador600px" ></div>
+
+	</div>
+
+<div id="footer">
+		<div class="container">
+			<div class="two-thirds column row">
+				<p>El sitio está bajo una licencia creative commons. 2013</p>
+			</div>
+		</div>
+</div>
+<!-- End Document
+================================================== -->
+	
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Vigenere</title>
+	<meta name="description" content="Web informativa sobre el cifrado de Vigénere">
+	<meta name="author" content="Alejandro Sánchez Muñoz, Cristian Vázquez Casanova y Samuel Velázquez Revilla">
+	<meta name="keywords" content="HTML5, web, vigenere" />
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+	<link rel="stylesheet" href="stylesheets/blueberry.css" />
+	<link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="js/jquery.blueberry.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/base.js"></script>
+	
+	<script>
+	$(window).load(function() {
+		$('.blueberry').blueberry();
+	});
+	</script>
+	
+
+
+</head>
+<body>
+		<div id="totop">
+        		<a href="#header" ><img src="images/totop.png" class="scale-with-grid" /></a>
+		</div>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<div id="header">
+		<div class="container">
+			<div id="logo" class="seven columns">
+				<a href="index.html"><img src="images/logo.png" class="scale-with-grid" /></a>
+			</div>
+			<div class="nine columns">
+				<div class="nav" >
+						<ul id="menu">
+							<li   id="linkinicio"><a href='index.html'><span>Inicio</span></a></li>
+							<li ><a href='documentacion.html'><span>¿Qué es Vigénere?</span></a></li>
+							<li><a href='webapp.html'><span>Aplicación WEB</span></a></li>
+							<li  class="active"><a href='programac.html' ><span>Programa en C</span></a></li>
+						</ul>
+						<form action="../">
+						<select id="responsiveMenuSelect" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+							<option class="option" value="index.html" >Inicio</option>
+							<option class="option" value="documentacion.html">¿Qué es Vigénere?</option>
+							<option class="option" value="webapp.html">Aplicación WEB</option>
+							<option class="option" value="programac.html"  selected="selected">Programa en C</option>
+						</select>
+						</form>
+						<script>
+						$("nav select").change(function() {
+						  window.location = $(this).find("option:selected").val();
+						});
+						</script>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="two-thirds column">
+			<p>
+				Paralelamente al cifrador en JavaScript hemos desarrollado también la versión en C. Se trata de un ejecutable
+				en el que podremos elegir si vamos a introducir el mensaje y clave directamente en pantalla o si vamos a trabajar
+				con archivos .txt que ya los contengan, elegir entre cifrado o descifrado y finalmente obtener el mensaje final.
+				A continuación, un vídeo en el que se muestra el funcionamiento del programa:
+			</p>
+		</div>
+		
+		<div class="one-third column">
+			<a href="ProgramaC.zip" id="buttondescarga" ></a>
+		</div>
+
+		<div class="sixteen columns">
+			<h1>Prueba de ejecución</h1>
+			<video src="PruebaVigenere.webm" width="100%" poster="movie.jpg" controls>
+					This is fallback content to display if the browser
+					does not support the video element.
+			</video>
+		</div>
+		
+	</div>
+
+<div id="footer">
+		<div class="container">
+			<div class="two-thirds column row">
+				<p>El sitio está bajo una licencia creative commons. 2013</p>
+			</div>
+		</div>
+</div>
+<!-- End Document
+================================================== -->
+	
+</body>
+</html>

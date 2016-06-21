@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Inicio - Vigenere</title>
+	<meta name="description" content="Web informativa sobre el cifrado de Vigénere">
+	<meta name="author" content="Alejandro Sánchez Muñoz, Cristian Vázquez Casanova y Samuel Velázquez Revilla">
+	<meta name="keywords" content="HTML5, web, vigenere" />
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+	<link rel="stylesheet" href="stylesheets/blueberry.css" />
+	<link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="js/jquery.blueberry.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/base.js"></script>
+	
+	
+	<script>
+	$(window).load(function() {
+		$('.blueberry').blueberry();
+	});
+	</script>
+
+</head>
+<body>
+
+		<div id="totop">
+        		<a href="#header" ><img src="images/totop.png" class="scale-with-grid" /></a>
+		</div>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<div id="header">
+		<div class="container">
+			<div id="logo" class="seven columns">
+				<a href="index.html"><img src="images/logo.png" class="scale-with-grid" /></a>
+			</div>
+			<div class="nine columns">
+				<div class="nav" >
+						<ul id="menu">
+							<li class="active"  id="linkinicio"><a href='#'><span>Inicio</span></a></li>
+							<li ><a href='documentacion.html'><span>¿Qué es Vigénere?</span></a></li>
+							<li><a href='webapp.html'><span>Aplicación WEB</span></a></li>
+							<li><a href='programac.html'><span>Programa en C</span></a></li>
+						</ul>
+						<form action="../">
+						<select id="responsiveMenuSelect" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+							<option class="option" value="index.html" selected="selected">Inicio</option>
+							<option class="option" value="documentacion.html">¿Qué es Vigénere?</option>
+							<option class="option" value="webapp.html">Aplicación WEB</option>
+							<option class="option" value="programac.html" >Programa en C</option>
+						</select>
+						</form>
+						<script>
+						$("nav select").change(function() {
+						  window.location = $(this).find("option:selected").val();
+						});
+						</script>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="container">
+	
+		<div id="slide" class="sixteen columns">
+			<!-- blueberry -->
+			<div class="blueberry">
+			  <ul class="slides">
+				<li><img src="images/slide1.png" /></li>
+				<li><img src="images/slide2.png" /></li>
+				<li><img src="images/slide3.png" /></li>
+			  </ul>
+			</div>
+			<!-- blueberry -->
+		</div>
+		
+		<div class="one-third column row">
+			<a  href='documentacion.html'><img  class="imglinkinicio scale-with-grid" src="images/iniciodocumentacion.png" /></a>
+			<h4 class="center">Historia Vigènere</h4>
+			<p class="justify">Un repaso a la historia del cifrado, desde su creación en Alemania en el s.XVI 
+			hasta su papel en la actualidad, pasando por sus 4 primeros y exitosos siglos hasta que el 
+			método Kasiski lo convirtió en descifrable.</p>
+		</div>
+		<div class="one-third column row">
+			<a  href='webapp.html'><img src="images/iniciowebdes.png" class="imglinkinicio scale-with-grid" class="scale-with-grid" /></a>
+			<h4 class="center">Vigènere WEB</h4>
+			<p class="justify">Aplicación desarrollada en JavaScript que ejecuta los cifrados y descifrados de Vigènere 
+			directamente desde una página web, simplemente introduciendo mensaje y cifra.</p>
+		</div>
+		<div class="one-third column row">
+			<a  href='programac.html'><img src="images/inicioejecutable.png" class="imglinkinicio scale-with-grid" class="scale-with-grid" /></a>
+			<h4 class="center">Descarga Vigènere</h4>
+			<p class="justify">Otro cifrador de Vigènere, esta vez realizado sobre el lenguaje de programación C. Esta versión, además 
+			de introduciendo directamente mensaje y clave, permite cifrar ficheros de texto.</p>
+		</div>
+	</div><!-- container INICIO -->
+
+<div id="footer">
+		<div class="container">
+			<h1>Información del proyecto</h1>
+			
+			<div class="one-third column row  justify">
+				<h4 class="center">Sobre el proyecto</h4>
+				<p>Desarrollado por Alejandro Sánchez, Cristian Vázquez y Samuel Velázquez como proyecto final de la asignatura Compresión y Seguridad,
+				perteneciente al Grado en Ingeniería Multimedia impartido en la UA.</p>
+			</div>
+			<div class="one-third column row  justify">
+				<h4 class="center">Sobre el sitio</h4>
+				<p>	Este sitio web ofrece información sobre el método de cifrado de Vigènere, así como dos implementaciones del mismo,
+				una realizada sobre JavaScript para ejecutar en un sitio web y otra sobre C.</p>
+			</div>
+			<div class="one-third column row  justify">
+				<h4 class="center">Sobre licencias</h4>
+				<p>Este sitio web está realizado con las siguientes herramientas: HTML5, CSS3, JavaScript y PHP. Está bajo licencia Creative
+				Commons de Reconocimiento – NoComercial.</p>
+			</div>
+		</div>
+</div>
+<!-- End Document
+================================================== -->
+	
+</body>
+</html>
